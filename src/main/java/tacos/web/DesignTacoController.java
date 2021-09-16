@@ -1,18 +1,24 @@
 package tacos.web;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tacos.Ingredient;
 import tacos.Taco;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static tacos.Ingredient.*;
 
+@Slf4j
 @Controller
 @RequestMapping("/design")
 public class DesignTacoController {
@@ -32,8 +38,6 @@ public class DesignTacoController {
                 new Ingredient("SRCR","Sour Cream", Type.SAUCE)
         );
 
-        String name = ingredients.get(0).getName();
-
         Type[] types = Type.values();
         for (Type type : types) {
             model.addAttribute(
@@ -51,5 +55,14 @@ public class DesignTacoController {
         return ingredients.stream()
                 .filter(ingredient -> ingredient.getType().equals(type))
                 .collect(Collectors.toList());
+    }
+
+    @PostMapping
+    public String processDesign(@Valid @ModelAttribute("design") Taco taco, Errors errors, Model model) {
+        if(errors.hasErrors()) {
+            return "design";
+        }
+        log.info(taco.toString());
+        return "redirect:/orders/current";
     }
 }
