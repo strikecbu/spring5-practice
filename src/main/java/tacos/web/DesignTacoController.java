@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import tacos.Ingredient;
 import tacos.Order;
 import tacos.Taco;
+import tacos.data.IngredientRepository;
 import tacos.data.JdbcIngredientRepository;
 import tacos.data.TacoRepository;
 
@@ -26,7 +27,7 @@ import static tacos.Ingredient.*;
 public class DesignTacoController {
 
     @Autowired
-    private JdbcIngredientRepository ingredientRepository;
+    private IngredientRepository ingredientRepository;
 
     @Autowired
     private TacoRepository tacoRepository;
