@@ -35,10 +35,14 @@ public class JdbcIngredientRepository {
 
 
     private Ingredient mapRowToIngredient(ResultSet resultSet, int rowNum) throws SQLException {
-        Ingredient ingredient = new Ingredient();
-        ingredient.setId(resultSet.getString("id"));
-        ingredient.setName(resultSet.getString("name"));
-        ingredient.setType(Ingredient.Type.valueOf(resultSet.getString("type")));
+        Ingredient ingredient = new Ingredient(
+                resultSet.getString("id"),
+                resultSet.getString("name"),
+                Ingredient.Type.valueOf(resultSet.getString("type"))
+        );
+//        ingredient.setId(resultSet.getString("id"));
+//        ingredient.setName(resultSet.getString("name"));
+//        ingredient.setType(Ingredient.Type.valueOf(resultSet.getString("type")));
         return ingredient;
     }
 

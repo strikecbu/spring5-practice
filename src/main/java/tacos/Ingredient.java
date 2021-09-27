@@ -8,16 +8,16 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.*;
 
 @Data
-//@RequiredArgsConstructor
-//@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @Entity
 @Table(name = "INGREDIENT")
 public class Ingredient {
     @Id
-    private String id;
-    private String name;
+    private final String id;
+    private final String name;
     @Enumerated(EnumType.STRING)
-    private Type type;
+    private final Type type;
 
     public enum Type {
         WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
