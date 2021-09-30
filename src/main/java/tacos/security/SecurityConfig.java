@@ -30,15 +30,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.headers().frameOptions().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/design", "/orders", "/h2-console/**")
+                .antMatchers("/design", "/orders")
                     .hasRole("USER")
-                .antMatchers(HttpMethod.POST, "/design", "h2-console/**", "/orders")
-                    .hasRole("USER")
+//                .antMatchers(HttpMethod.POST, "/design", "h2-console/**", "/orders")
+//                    .hasRole("USER")
                 .antMatchers("/", "/**")
                     .permitAll()
-//                .antMatchers("/h2-console", "/h2-console/login.do").permitAll()
+                .antMatchers("/h2-console", "/h2-console/login.do").permitAll()
                 .and()
                 .formLogin()
                     .loginPage("/login")
