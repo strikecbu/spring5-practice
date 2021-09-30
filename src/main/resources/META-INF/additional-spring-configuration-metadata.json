@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "taco.orders.pageSize",
+      "type": "java.lang.String",
+      "description": "Get from DB max size of order."
+  }
+] }

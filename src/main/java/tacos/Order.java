@@ -20,6 +20,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(targetEntity = User.class)
+    private User user;
+
     @Column(name = "PLACEDAT")
     private Date placedAt;
 
